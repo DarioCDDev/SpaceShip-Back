@@ -1,7 +1,6 @@
 package com.spaceship.dtos;
 
-
-import com.spaceship.entities.Rol;
+import com.spaceship.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class CreateUserBodyDTO {
 
-    private Long userId;
-    private String email;
-    private String username;
-    private Rol rol;
+    private User user;
+    private Long rolId;
 }

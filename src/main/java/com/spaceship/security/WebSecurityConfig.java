@@ -34,15 +34,15 @@ public class WebSecurityConfig {
 
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
         jwtAuthenticationFilter.setAuthenticationManager(authManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/user/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/users/login");
 
         return http
                 .csrf().disable()
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/api/v1/user/register").permitAll()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/api/v1/users/register").permitAll()
+                .requestMatchers("/api/v1/roles/create").permitAll() //Quitar esto
 //                .requestMatchers("*").permitAll()
                 .anyRequest()
                 .authenticated()
