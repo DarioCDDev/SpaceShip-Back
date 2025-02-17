@@ -1,7 +1,6 @@
 package com.spaceship.controllers;
 
 import com.spaceship.dtos.CreateUserBodyDTO;
-import com.spaceship.entities.User;
 import com.spaceship.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
