@@ -34,4 +34,8 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;
+
+    @OneToOne
+    @JoinColumn(name = "wallet_id", nullable = false)
+    private Wallet wallet;
 }
