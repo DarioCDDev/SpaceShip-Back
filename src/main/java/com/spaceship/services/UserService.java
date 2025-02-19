@@ -4,8 +4,10 @@ import com.spaceship.dtos.CreateUserBodyDTO;
 import com.spaceship.dtos.UserDTO;
 import com.spaceship.entities.Rol;
 import com.spaceship.entities.User;
+import com.spaceship.entities.Wallet;
 import com.spaceship.repository.RolRepository;
 import com.spaceship.repository.UserRepository;
+import com.spaceship.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RolRepository rolRepository;
+    private final WalletRepository walletRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, RolRepository rolRepository) {
+    public UserService(UserRepository userRepository, RolRepository rolRepository, WalletRepository walletRepository) {
         this.userRepository = userRepository;
         this.rolRepository = rolRepository;
+        this.walletRepository = walletRepository;
     }
 
     public ResponseEntity<Map<String, Object>> registerUser(CreateUserBodyDTO createUserBodyDTO) {
@@ -42,6 +46,11 @@ public class UserService {
                     .orElseThrow(() -> new RuntimeException("Role with ID " + createUserBodyDTO.getRolId() + " not found"));
 
             user.setRol(rol);
+            Wallet wallet = new Wallet();
+            user.setWallet(wallet);
+            wallet.setQuantity(200000f);
+            walletRepository.save(wallet);
+            wallet.setUser(user);
             userRepository.save(user);
 
             UserDTO userDTO = new UserDTO(user.getUserId(), user.getEmail(), user.getUsername(), user.getRol());
